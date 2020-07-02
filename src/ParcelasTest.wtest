@@ -1,0 +1,24 @@
+import Parcelas.*
+import Plantas.*
+
+test "Parcelas" {
+
+	const unaParcela = new ParcelasEcologicas(ancho = 20,largo = 1,horasDeSol = 10 )
+	
+	//Superficie
+	assert.equals(20,unaParcela.superficieDeLaParcela())
+	
+	//Cantidad maxima que tolera
+	assert.equals(4,unaParcela.cantidadMaximaQueTolera())
+	
+	unaParcela.plantar(new Soja(altura = 1.5, anioDeObtencion = 2009))
+	unaParcela.plantar(new Soja(altura = 1.3, anioDeObtencion = 2009))
+	unaParcela.plantar(new Soja(altura = 1.6, anioDeObtencion = 2009))
+	unaParcela.plantar(new Soja(altura = 1.9, anioDeObtencion = 2009))
+	
+	assert.notThat(unaParcela.tieneComplicaciones())
+	
+	const unaPlanta = new Soja(altura = 1.4, anioDeObtencion = 2009)
+	assert.throwsException{unaParcela.plantar(unaPlanta)}
+		
+}
